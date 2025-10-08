@@ -31,6 +31,59 @@ class GalleryBuilder:
         self.footer_font = self.config.get('footer-font', '')
         self.global_font = self.config.get('global-font', '')
         
+        # 版权年份配置
+        self.start_year = self.config.get('start-year', None)
+        self.start_date = self.config.get('start-date', None)
+    
+    def get_copyright_year(self):
+        """生成版权年份字符串"""
+        current_year = datetime.now().year
+        
+        # 优先使用start-date，如果没有则使用start-year
+        start_year = None
+        
+        if self.start_date:
+            try:
+                # 解析日期字符串，支持多种格式
+                if isinstance(self.start_date, str):
+                    # 尝试解析 YYYY-MM-DD 格式
+                    if '-' in self.start_date:
+                        parsed_date = datetime.strptime(self.start_date, '%Y-%m-%d')
+                        start_year = parsed_date.year
+                    # 尝试解析 YYYY/MM/DD 格式
+                    elif '/' in self.start_date:
+                        parsed_date = datetime.strptime(self.start_date, '%Y/%m/%d')
+                        start_year = parsed_date.year
+                    # 尝试解析 YYYY.MM.DD 格式
+                    elif '.' in self.start_date:
+                        parsed_date = datetime.strptime(self.start_date, '%Y.%m.%d')
+                        start_year = parsed_date.year
+                    else:
+                        # 如果只是年份字符串
+                        start_year = int(self.start_date)
+                else:
+                    start_year = int(self.start_date)
+            except (ValueError, TypeError):
+                print(f"⚠️  警告: 无法解析start-date '{self.start_date}'，将忽略此配置")
+                start_year = None
+        
+        # 如果没有start_date，使用start_year
+        if start_year is None and self.start_year is not None:
+            start_year = self.start_year
+        
+        # 生成版权年份字符串
+        if start_year is None:
+            # 如果没有设置开始年份，只显示当前年份
+            return str(current_year)
+        
+        # 如果设置了开始年份
+        if start_year == current_year:
+            # 如果开始年份等于当前年份，只显示当前年份
+            return str(current_year)
+        else:
+            # 否则显示年份范围
+            return f"{start_year}-{current_year}"
+        
     def get_media_type(self, file_path):
         """判断媒体类型"""
         ext = file_path.suffix.lower()
@@ -269,7 +322,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© 2025 <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
     </div>
 
     <script src="enhancements.js"></script>
@@ -371,7 +424,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© 2025 <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
     </div>
 
     <script src="enhancements.js"></script>
@@ -466,7 +519,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© 2025 <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
     </div>
 
     <script>
