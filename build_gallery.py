@@ -79,7 +79,9 @@ class GalleryBuilder:
                         album['cover'] = cover_path
                 
                 # 扫描相册内的媒体文件
-                for media_file in item.iterdir():
+                media_files = list(item.iterdir())
+                media_files.sort(key=lambda x: x.name)  # 按文件名排序确保顺序一致
+                for media_file in media_files:
                     if media_file.is_file():
                         media_type = self.get_media_type(media_file)
                         if media_type in ['image', 'video']:
