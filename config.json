@@ -1,0 +1,10 @@
+{
+  "input": "./",
+  "output": "./build_output",
+  "title": "Image Gallery",
+  "footer": "GALLERY.GW124.TOP",
+  "footer-link": "https://gallery.gw124.top",
+  "title-font": "brand",
+  "footer-font": "brand",
+  "global-font": "brand"
+}
