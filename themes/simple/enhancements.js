@@ -94,9 +94,61 @@
         const siteName = config.footer || 'GALLERY.GW124.TOP';
         const siteLink = config['footer-link'] || 'https://gw124.top';
         
-        // 创建新的页脚内容
-        footerP.innerHTML = `© 2025 <a href="${siteLink}" target="_blank">${siteName}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a>`;
+        // 计算版权年份
+        const copyrightYear = getCopyrightYear(config);
         
+        // 创建新的页脚内容
+        footerP.innerHTML = `© ${copyrightYear} <a href="${siteLink}" target="_blank">${siteName}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a>`;
+        
+    }
+    
+    function getCopyrightYear(config) {
+        const currentYear = new Date().getFullYear();
+        let startYear = null;
+        
+        // 优先使用 start-date
+        if (config['start-date']) {
+            try {
+                const dateStr = config['start-date'];
+                let parsedYear = null;
+                
+                // 尝试解析不同格式的日期
+                if (dateStr.includes('-')) {
+                    // YYYY-MM-DD 格式
+                    parsedYear = parseInt(dateStr.split('-')[0]);
+                } else if (dateStr.includes('/')) {
+                    // YYYY/MM/DD 格式
+                    parsedYear = parseInt(dateStr.split('/')[0]);
+                } else if (dateStr.includes('.')) {
+                    // YYYY.MM.DD 格式
+                    parsedYear = parseInt(dateStr.split('.')[0]);
+                } else {
+                    // 仅年份
+                    parsedYear = parseInt(dateStr);
+                }
+                
+                if (!isNaN(parsedYear) && parsedYear > 1900 && parsedYear <= currentYear) {
+                    startYear = parsedYear;
+                }
+            } catch (error) {
+                console.warn('无法解析 start-date:', error);
+            }
+        }
+        
+        // 如果没有 start-date，尝试使用 start-year
+        if (startYear === null && config['start-year']) {
+            const year = parseInt(config['start-year']);
+            if (!isNaN(year) && year > 1900 && year <= currentYear) {
+                startYear = year;
+            }
+        }
+        
+        // 生成版权年份字符串
+        if (startYear === null || startYear === currentYear) {
+            return currentYear.toString();
+        } else {
+            return `${startYear}-${currentYear}`;
+        }
     }
     
     function initializePagination() {
