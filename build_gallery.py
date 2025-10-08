@@ -408,8 +408,8 @@ class GalleryBuilder:
 """
         
         if media['type'] == 'video':
-            # URL编码视频路径以处理特殊字符（如#和中文字符）
-            encoded_url = urllib.parse.quote(media['url'], safe='/')
+            # 视频路径已经在上面的copy_media_files中编码过了，直接使用
+            encoded_url = media['url']
             # 根据文件扩展名确定MIME类型
             ext = media['path'].suffix.lower()
             if ext == '.mp4':
