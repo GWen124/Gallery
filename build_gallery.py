@@ -629,6 +629,25 @@ class GalleryBuilder:
         if config_mtime > build_mtime:
             return True
         
+        # 检查主题文件是否更新
+        theme_files = [
+            ('themes/simple/style.css', 'style.css'),
+            ('themes/simple/enhancements.js', 'enhancements.js'),
+            ('build_gallery.py', None)  # 检查构建脚本本身
+        ]
+        
+        for src_path, dest_name in theme_files:
+            src = Path(src_path)
+            if src.exists():
+                if dest_name:
+                    dest = self.output_dir / dest_name
+                    if not dest.exists() or dest.stat().st_mtime < src.stat().st_mtime:
+                        return True
+                else:
+                    # 对于build_gallery.py，只要它更新了就重新构建
+                    if build_mtime < src.stat().st_mtime:
+                        return True
+        
         # 检查输入目录是否有新文件
         for item in self.input_dir.rglob('*'):
             if item.is_file():
