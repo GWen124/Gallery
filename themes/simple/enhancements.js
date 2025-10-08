@@ -109,26 +109,31 @@
         // 优先使用 start-date
         if (config['start-date']) {
             try {
-                const dateStr = config['start-date'];
-                let parsedYear = null;
-                
-                // 尝试解析不同格式的日期
-                if (dateStr.includes('-')) {
-                    // YYYY-MM-DD 格式
-                    parsedYear = parseInt(dateStr.split('-')[0]);
-                } else if (dateStr.includes('/')) {
-                    // YYYY/MM/DD 格式
-                    parsedYear = parseInt(dateStr.split('/')[0]);
-                } else if (dateStr.includes('.')) {
-                    // YYYY.MM.DD 格式
-                    parsedYear = parseInt(dateStr.split('.')[0]);
-                } else {
-                    // 仅年份
-                    parsedYear = parseInt(dateStr);
-                }
-                
-                if (!isNaN(parsedYear) && parsedYear > 1900 && parsedYear <= currentYear) {
-                    startYear = parsedYear;
+                const dateStr = String(config['start-date']).trim();
+                if (dateStr) {
+                    let parsedYear = null;
+                    
+                    // 尝试解析不同格式的日期
+                    if (dateStr.includes('-')) {
+                        // YYYY-MM-DD 格式
+                        parsedYear = parseInt(dateStr.split('-')[0]);
+                    } else if (dateStr.includes('/')) {
+                        // YYYY/MM/DD 格式
+                        parsedYear = parseInt(dateStr.split('/')[0]);
+                    } else if (dateStr.includes('.')) {
+                        // YYYY.MM.DD 格式
+                        parsedYear = parseInt(dateStr.split('.')[0]);
+                    } else {
+                        // 仅年份
+                        parsedYear = parseInt(dateStr);
+                    }
+                    
+                    // 验证年份的合理性
+                    if (!isNaN(parsedYear) && parsedYear > 1900 && parsedYear <= currentYear) {
+                        startYear = parsedYear;
+                    } else if (parsedYear > currentYear) {
+                        console.warn('开始年份大于当前年份，将忽略配置');
+                    }
                 }
             } catch (error) {
                 console.warn('无法解析 start-date:', error);
@@ -140,6 +145,8 @@
             const year = parseInt(config['start-year']);
             if (!isNaN(year) && year > 1900 && year <= currentYear) {
                 startYear = year;
+            } else if (year > currentYear) {
+                console.warn('开始年份大于当前年份，将忽略配置');
             }
         }
         

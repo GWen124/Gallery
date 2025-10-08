@@ -76,6 +76,11 @@ class GalleryBuilder:
             # 如果没有设置开始年份，只显示当前年份
             return str(current_year)
         
+        # 验证年份范围的合理性
+        if start_year > current_year:
+            print(f"⚠️  警告: 开始年份 {start_year} 大于当前年份 {current_year}，将使用当前年份")
+            return str(current_year)
+        
         # 如果设置了开始年份
         if start_year == current_year:
             # 如果开始年份等于当前年份，只显示当前年份
