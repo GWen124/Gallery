@@ -48,6 +48,9 @@ class GalleryBuilder:
         """扫描画廊目录，获取所有相册和媒体文件"""
         albums = []
         
+        # 获取封面配置
+        galleries_config = self.config.get('galleries', {})
+        
         for item in self.input_dir.iterdir():
             if item.is_dir():
                 album = {
@@ -55,8 +58,25 @@ class GalleryBuilder:
                     'path': item,
                     'media': [],
                     'thumbnail': None,
+                    'cover': None,
                     'count': 0
                 }
+                
+                # 检查是否有配置的封面
+                album_config = galleries_config.get(item.name, {})
+                cover_path = album_config.get('cover', '')
+                
+                if cover_path:
+                    # 处理封面路径
+                    if cover_path.startswith('http'):
+                        # 完整URL
+                        album['cover'] = cover_path
+                    elif cover_path.startswith('/'):
+                        # 相对路径，去掉开头的斜杠
+                        album['cover'] = cover_path[1:]
+                    else:
+                        # 相对路径
+                        album['cover'] = cover_path
                 
                 # 扫描相册内的媒体文件
                 for media_file in item.iterdir():
@@ -168,7 +188,11 @@ class GalleryBuilder:
         for album in albums:
             # 确定缩略图URL
             thumbnail_url = None
-            if album['thumbnail']:
+            
+            # 优先使用配置的封面
+            if album.get('cover'):
+                thumbnail_url = album['cover']
+            elif album['thumbnail']:
                 # 如果相册的第一个文件是视频，使用SVG占位符
                 if album['thumbnail']['type'] == 'video':
                     svg_content = '''<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
