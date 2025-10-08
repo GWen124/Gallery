@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build_output
-          key: ${{ runner.os }}-build-${{ hashFiles('gallery/**', 'config.json', 'themes/**') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('**/*.py', 'config.json', 'themes/**', 'requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-build-
           
@@ -50,10 +50,31 @@ jobs:
           
       - name: Build Gallery with Custom Generator
         run: |
+          echo "开始构建画廊..."
           python build_gallery.py
+          echo "构建完成，检查输出目录..."
+          ls -la build_output/
+          echo "输出目录大小:"
+          du -sh build_output/
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        
+      - name: Verify build output
+        run: |
+          echo "验证构建输出..."
+          if [ ! -f "build_output/index.html" ]; then
+            echo "错误: index.html 不存在"
+            exit 1
+          fi
+          echo "检查文件数量:"
+          find build_output -type f | wc -l
+          echo "检查大文件 (>50MB):"
+          find build_output -type f -size +50M -exec ls -lh {} \;
+          echo "检查大文件 (>20MB):"
+          find build_output -type f -size +20M -exec ls -lh {} \;
+          echo "总大小:"
+          du -sh build_output/
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
