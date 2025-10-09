@@ -12,6 +12,7 @@ from datetime import datetime
 import urllib.parse
 import hashlib
 import base64
+import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -349,7 +350,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.top/" target="_blank">Wen</a></p>
     </div>
 
     <script src="enhancements.js"></script>
@@ -451,7 +452,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.top/" target="_blank">Wen</a></p>
     </div>
 
     <script src="enhancements.js"></script>
@@ -546,7 +547,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.top/" target="_blank">Wen</a></p>
     </div>
 
     <script>

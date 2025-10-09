@@ -98,7 +98,7 @@
         const copyrightYear = getCopyrightYear(config);
         
         // 创建新的页脚内容
-        footerP.innerHTML = `© ${copyrightYear} <a href="${siteLink}" target="_blank">${siteName}</a> • Powered By <a href="https://gw124.top/" target="_blank">Wen</a>`;
+        footerP.innerHTML = `© ${copyrightYear} <a href="${siteLink}" target="_blank">${siteName}</a> • Powered by <a href="https://gw124.top/" target="_blank">Wen</a>`;
         
     }
     
