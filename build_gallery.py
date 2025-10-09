@@ -102,6 +102,27 @@ class GalleryBuilder:
         return 'unknown'
     
     
+    def parse_album_name(self, folder_name):
+        """
+        解析相册文件夹名称，提取序号和显示名称
+        支持格式：
+        - "01-相册名" -> (1, "相册名", "01-相册名")
+        - "001_相册名" -> (1, "相册名", "001_相册名")
+        - "相册名" -> (None, "相册名", "相册名")
+        """
+        import re
+        
+        # 尝试匹配开头的序号模式：数字 + 分隔符（-、_、空格、.）
+        match = re.match(r'^(\d+)[-_\.\s]+(.+)$', folder_name)
+        
+        if match:
+            order = int(match.group(1))
+            display_name = match.group(2)
+            return (order, display_name, folder_name)
+        else:
+            # 没有序号，使用原名称
+            return (None, folder_name, folder_name)
+    
     def scan_gallery(self):
         """扫描画廊目录，获取所有相册和媒体文件"""
         albums = []
@@ -111,8 +132,13 @@ class GalleryBuilder:
         
         for item in self.input_dir.iterdir():
             if item.is_dir():
+                # 解析文件夹名称，提取序号和显示名称
+                order, display_name, folder_name = self.parse_album_name(item.name)
+                
                 album = {
-                    'name': item.name,
+                    'name': item.name,  # 原始文件夹名（用于文件路径）
+                    'display_name': display_name,  # 显示名称（隐藏序号）
+                    'order': order,  # 排序序号
                     'path': item,
                     'media': [],
                     'thumbnail': None,
@@ -163,8 +189,8 @@ class GalleryBuilder:
                 if album['count'] > 0:
                     albums.append(album)
         
-        # 按名称排序
-        albums.sort(key=lambda x: x['name'])
+        # 排序：有序号的按序号排序，没有序号的按名称排序，有序号的排在前面
+        albums.sort(key=lambda x: (x['order'] is None, x['order'] if x['order'] is not None else 0, x['display_name']))
         return albums
     
     def copy_media_files(self, albums):
@@ -285,14 +311,14 @@ class GalleryBuilder:
 """
             
             if thumbnail_url:
-                html += f'                        <img src="{thumbnail_url}" alt="{album["name"]}" loading="lazy" decoding="async">'
+                html += f'                        <img src="{thumbnail_url}" alt="{album["display_name"]}" loading="lazy" decoding="async">'
             else:
                 html += '                        <div class="no-thumbnail">无预览图</div>'
             
             html += f"""
                     </div>
                     <div class="album-info">
-                        <h3 class="album-title">{album['name']}</h3>
+                        <h3 class="album-title">{album['display_name']}</h3>
                         <p class="album-count">{type_text}</p>
                     </div>
                 </a>
@@ -343,10 +369,10 @@ class GalleryBuilder:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{album['name']} - {self.title}</title>
+    <title>{album['display_name']} - {self.title}</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <meta name="description" content="相册 - {album['name']}">
+    <meta name="description" content="相册 - {album['display_name']}">
     <meta name="robots" content="index, follow">
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="enhancements.js" as="script">
@@ -358,11 +384,11 @@ class GalleryBuilder:
 
     <div class="main">
         <div class="breadcrumb">
-            <a href="index.html">首页</a> / <span>{album['name']}</span>
+            <a href="index.html">首页</a> / <span>{album['display_name']}</span>
         </div>
 
         <div class="album-header">
-            <h2>{album['name']}</h2>
+            <h2>{album['display_name']}</h2>
         </div>
 
         <div class="albums" id="media-container">
@@ -445,7 +471,7 @@ class GalleryBuilder:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{media['name']} - {album['name']} - {self.title}</title>
+    <title>{media['name']} - {album['display_name']} - {self.title}</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="description" content="媒体文件 - {media['name']}">
@@ -460,7 +486,7 @@ class GalleryBuilder:
 
     <div class="main">
         <div class="breadcrumb">
-            <a href="index.html">首页</a> / <a href="album_{album['name'].replace(' ', '_')}.html">{album['name']}</a> / <span>{media['name']}</span>
+            <a href="index.html">首页</a> / <a href="album_{album['name'].replace(' ', '_')}.html">{album['display_name']}</a> / <span>{media['name']}</span>
         </div>
 
         <div class="media-viewer">
