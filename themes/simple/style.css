@@ -175,6 +175,16 @@ body {
   background-clip: text;
 }
 
+/* 相册链接样式 - 去除下划线 */
+.album a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.album a:hover {
+  text-decoration: none;
+}
+
 /* 默认缩略图样式 */
 .album.default-thumbnail {
   position: relative;
@@ -386,7 +396,6 @@ body {
 .footer p a:first-of-type {
   color: #000000;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.4px;
 }
 
@@ -397,7 +406,6 @@ body {
 .footer p a:last-of-type {
   color: #000000;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.4px;
 }
 
