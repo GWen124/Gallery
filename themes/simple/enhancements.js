@@ -307,11 +307,4 @@
         }
     }
     
-    // 如果页面已经加载完成，立即执行
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeEnhancements);
-    } else {
-        initializeEnhancements();
-    }
-    
 })();

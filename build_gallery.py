@@ -6,12 +6,12 @@
 
 import json
 import shutil
+import re
 from pathlib import Path
 from datetime import datetime
 import urllib.parse
 import hashlib
 import base64
-import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -110,8 +110,6 @@ class GalleryBuilder:
         - "001_相册名" -> (1, "相册名", "001_相册名")
         - "相册名" -> (None, "相册名", "相册名")
         """
-        import re
-        
         # 尝试匹配开头的序号模式：数字 + 分隔符（-、_、空格、.）
         match = re.match(r'^(\d+)[-_\.\s]+(.+)$', folder_name)
         
@@ -176,8 +174,6 @@ class GalleryBuilder:
                                 'size': media_file.stat().st_size,
                                 'modified': datetime.fromtimestamp(media_file.stat().st_mtime)
                             }
-                            
-                            # 视频文件不生成缩略图，直接使用原文件
                             
                             album['media'].append(media_info)
                             
