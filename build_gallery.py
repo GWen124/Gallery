@@ -350,7 +350,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.com/" target="_blank">Wen</a></p>
     </div>
 
     <script src="enhancements.js"></script>
@@ -452,7 +452,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.com/" target="_blank">Wen</a></p>
     </div>
 
     <script src="enhancements.js"></script>
@@ -547,7 +547,7 @@ class GalleryBuilder:
     </div>
 
     <div class="footer">
-        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.top/" target="_blank">Wen</a></p>
+        <p>© {self.get_copyright_year()} <a href="{self.footer_link}" target="_blank">{self.footer}</a> • Powered by <a href="https://gw124.com/" target="_blank">Wen</a></p>
     </div>
 
     <script>
