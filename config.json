@@ -2,39 +2,39 @@
   "input": "./",
   "output": "./build_output",
   "title": "Image Gallery",
-  "footer": "IMAGE.GW124.TOP",
-  "footer-link": "https://image.gw124.top",
+  "footer": "IMAGE.GW124.COM",
+  "footer-link": "https://image.gw124.com",
   "start-date": "2025-10-01",
   "title-font": "brand",
   "footer-font": "brand",
   "global-font": "brand",
   "galleries": {
     "Animation": {
-      "cover": "https://image.gw124.top/Vertical Background/fd785455-ad22-4c8f-9c0a-5b4154faae8e.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/fd785455-ad22-4c8f-9c0a-5b4154faae8e.jpeg"
     },
     "Avatar": {
-      "cover": "https://image.gw124.top/Vertical Background/e95e7d32-c770-4fca-afdb-cb45516574a4.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/e95e7d32-c770-4fca-afdb-cb45516574a4.jpeg"
     },
     "Background": {
-      "cover": "https://image.gw124.top/Vertical Background/451fe98c-a14e-48f0-a120-e9c78cc35bcb.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/451fe98c-a14e-48f0-a120-e9c78cc35bcb.jpeg"
     },
     "Banner": {
-      "cover": "https://image.gw124.top/Vertical Background/c856b386-7b80-4723-aedb-a30bb58de503.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/c856b386-7b80-4723-aedb-a30bb58de503.jpeg"
     },
     "CineGallery": {
-      "cover": "https://image.gw124.top/Vertical Background/f2a5264e-0e0e-4d7b-af25-6853f09b4fd4.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/f2a5264e-0e0e-4d7b-af25-6853f09b4fd4.jpeg"
     },
     "Other": {
-      "cover": "https://image.gw124.top/Vertical Background/5fa7a982-0456-45f0-bbbc-f408b7e115ac.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/5fa7a982-0456-45f0-bbbc-f408b7e115ac.jpeg"
     },
     "Temp": {
-      "cover": "https://image.gw124.top/Vertical Background/4b8c2753-3bbb-40cb-8690-fa63de8434a1.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/4b8c2753-3bbb-40cb-8690-fa63de8434a1.jpeg"
     },
     "Vertical Background": {
-      "cover": "https://image.gw124.top/Vertical Background/706c9e57-6ece-4a34-affc-b76f07698c93.jpeg"
+      "cover": "https://image.gw124.com/Vertical Background/706c9e57-6ece-4a34-affc-b76f07698c93.jpeg"
     },
     "Video": {
-      "cover": "https://image.gw124.top/Vertical Background/10dc2f00-30bb-4482-a5b5-f780128c07e4.gif"
+      "cover": "https://image.gw124.com/Vertical Background/10dc2f00-30bb-4482-a5b5-f780128c07e4.gif"
     }
   }
 }
