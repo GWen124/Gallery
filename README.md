@@ -59,8 +59,8 @@
      "input": "./",
      "output": "./build_output",
      "title": "我的图片画廊",
-     "footer": "GALLERY.GW124.TOP",
-     "footer-link": "https://gallery.gw124.top",
+     "footer": "GALLERY.GW124.COM",
+     "footer-link": "https://gallery.gw124.com",
      "start-date": "2020-10-01",
      "title-font": "brand",
      "footer-font": "brand",
@@ -136,8 +136,8 @@
   "input": "./",
   "output": "./build_output",
   "title": "我的图片画廊",
-  "footer": "GALLERY.GW124.TOP",
-  "footer-link": "https://gallery.gw124.top",
+  "footer": "GALLERY.GW124.COM",
+  "footer-link": "https://gallery.gw124.com",
   "start-date": "2020-10-01",
   "title-font": "brand",
   "footer-font": "brand",
@@ -650,9 +650,9 @@ python -m http.server 8000
 
 - **GitHub Issues** - [报告问题](https://github.com/GWen124/Gallery/issues)
 - **GitHub Discussions** - [讨论功能](https://github.com/GWen124/Gallery/discussions)
-- **个人网站** - [GW124.TOP](https://gw124.top/)
-- **在线演示** - [https://gallery.gw124.top/](https://gallery.gw124.top/)
+- **个人网站** - [GW124.COM](https://gw124.com/)
+- **在线演示** - [https://gallery.gw124.com/](https://gallery.gw124.com/)
 
 ---
 
-**Powered by [Wen](https://gw124.top/) • Made with ❤️ for the community**
+**Powered by [Wen](https://gw124.com/) • Made with ❤️ for the community**
