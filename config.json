@@ -2,15 +2,15 @@
   "input": "./",
   "output": "./build_output",
   "title": "Image Gallery",
-  "footer": "IMAGE.GW124.COM",
-  "footer-link": "https://image.gw124.com",
+  "footer": "IMAGE.GW124.TOP",
+  "footer-link": "https://image.gw124.top",
   "start-date": "2025-10-01",
   "title-font": "brand",
   "footer-font": "brand",
   "global-font": "brand",
   "galleries": {
     "Background": {
-      "cover": "https://image.gw124.com/Vertical Background/451fe98c-a14e-48f0-a120-e9c78cc35bcb.jpeg"
+      "cover": "https://image.gw124.top/Vertical Background/451fe98c-a14e-48f0-a120-e9c78cc35bcb.jpeg"
     }
   }
 }
